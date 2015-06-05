@@ -4,7 +4,7 @@ A command-line tool to execute remote command through ssh
 
 ### Install
 ```
-$ go get github.com/txthinking/toolbox/sshexec
+$ go get github.com/txthinking/sshexec
 ```
 
 ### Usage
