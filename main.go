@@ -27,7 +27,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "sshexec"
-	app.Version = "20230118"
+	app.Version = "20230215"
 	app.Usage = "Run command on remote server"
 	app.Authors = []*cli.Author{
 		{
@@ -74,6 +74,11 @@ func main() {
 			Name:  "to",
 			Usage: "dst with upload/download",
 		},
+		&cli.IntFlag{
+			Name:  "timeout",
+			Usage: "seconds",
+			Value: 60,
+		},
 	}
 	app.Action = func(c *cli.Context) error {
 		if c.String("server") == "" || c.String("user") == "" {
@@ -96,7 +101,7 @@ func main() {
 				return err
 			}
 		}
-		i, err := hancock.NewInstance(c.String("server"), c.String("user"), c.String("password"), b)
+		i, err := hancock.NewInstance(c.String("server"), c.String("user"), c.String("password"), b, c.Int("timeout"))
 		if err != nil {
 			return err
 		}

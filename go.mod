@@ -3,7 +3,7 @@ module github.com/txthinking/sshexec
 go 1.19
 
 require (
-	github.com/txthinking/hancock v0.0.0-20221122131658-999ada2e8444
+	github.com/txthinking/hancock v0.0.0-20230215134855-24c9d29cf1fe
 	github.com/urfave/cli/v2 v2.23.7
 	golang.org/x/crypto v0.5.0
 )
