@@ -15,6 +15,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -61,6 +62,10 @@ func main() {
 			Name:    "command",
 			Aliases: []string{"c"},
 			Usage:   "command will be run on remote server, ignore upload/download",
+		},
+		&cli.BoolFlag{
+			Name:  "sudo",
+			Usage: "run command with sudo, does not apply to download and upload",
 		},
 		&cli.StringFlag{
 			Name:  "upload",
@@ -114,7 +119,11 @@ func main() {
 			defer s.Close()
 			s.Stdout = os.Stdout
 			s.Stderr = os.Stderr
-			err = s.Run(c.String("command"))
+			cmd := c.String("command")
+			if c.Bool("sudo") {
+				cmd = fmt.Sprintf("sudo -H -u root sh -c 'PATH=/root/.nami/bin:$PATH %s'", cmd)
+			}
+			err = s.Run(cmd)
 			if err != nil {
 				return err
 			}
