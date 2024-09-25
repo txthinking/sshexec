@@ -27,7 +27,7 @@ import (
 func main() {
 	app := cli.NewApp()
 	app.Name = "sshexec"
-	app.Version = "20230215"
+	app.Version = "20240925"
 	app.Usage = "Run command on remote server"
 	app.Authors = []*cli.Author{
 		{
@@ -166,5 +166,6 @@ func main() {
 	}
 	if err := app.Run(os.Args); err != nil {
 		log.Println(err)
+		os.Exit(1)
 	}
 }
